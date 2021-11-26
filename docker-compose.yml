@@ -1,0 +1,27 @@
+version: '3'
+services:
+  api:
+    image: 6977890715/fastapi
+    # build: .
+    ports:
+      - 80:8000
+    environment:
+      - DATABASE_HOSTNAME=${DATABASE_HOSTNAME}
+      - DATABASE_PORT=${DATABASE_PORT}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_USERNAME=${DATABASE_USERNAME}
+      - SECRET_KEY=${SECRET_KEY}
+      - ALGORITHM=${ALGORITHM}
+      - ACCESS_TOKEN_EXPIRE_MINUTES=${ACCESS_TOKEN_EXPIRE_MINUTES}
+    depends_on:
+      - mysql
+  mysql:
+     image: mysql
+     environment:
+       - MYSQL_DATABASE=${DATABASE_NAME}
+       - MYSQL_PASSWORD=${DATABASE_PASSWORD}
+     volumes:
+       - mysql-db:/var/lib/mysql/data
+volumes:
+  mysql-db:
