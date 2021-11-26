@@ -6,7 +6,7 @@ from .database import engine
 from .routers import post, user, auth, vote
 from .config import settings
 
-#自动创建所以表
+#自动创建所以表，使用alembic后就不需要了
 #models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
